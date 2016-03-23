@@ -1,32 +1,31 @@
-# Problem: Given a FASTA file with DNA sequences, find 10 most frequent sequences and return the sequence and their counts in the file.
+"""Given a FASTA file with DNA sequences, find 10 most frequent sequences and return the sequence
+and their counts in the file."""
+
+# Filename: /Users/kevinvogel/PycharmProjects/fasta_project/freq_of_seq.py
 
 from Bio import SeqIO
 from collections import Counter
 
-# Prompt user for desired .fasta file.
-seq = input("Enter the .fasta sequence file you wish to work with: ")
-file = open(seq, 'r')
-line = file.read()
-print(line)
-print("\n")
+__author__ = 'Kevin Vogel'
+__email__ = 'kevinvogel@mac.com'
 
-# Function to parse and count the 10 most frequent sequences in the .fasta file.
-def freqfastaseq(file):
-    # Stores file in an array.
+
+def freqfastaseq():
+    """
+    Stores file in an array and counts the 10 most frequent sequences.
+    :return: sequence and count in the file
+    """
     sequences = []
-    fasta_sequences = SeqIO.parse(open(file), 'fasta')
+    fasta_sequences = SeqIO.parse(open('sample.fasta', 'r'), 'fasta')
     for fasta in fasta_sequences:
         sequence = str(fasta.seq)
         sequences.append(sequence)
-    # Counts the 10 most frequent sequences.
     count = Counter(sequences)
     most_common_seq = count.most_common(10)
     return most_common_seq
 
-print("\n")
-print("Here are the 10 most frequent sequences and their counts in the fasta file above: ")
 
-# Prints sequences in a list.
-for i in freqfastaseq(seq):
-    print(i)
-print("\n")
+print("Here are the 10 most frequent sequences and their counts in the .fasta file: ")
+
+if __name__ == '__main__':
+    print(freqfastaseq())
